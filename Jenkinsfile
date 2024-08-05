@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building the code...'
-                    // Example: sh 'mvn clean package'
+     
                 }
             }
         }
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running unit and integration tests...'
-                    // Example: sh 'mvn test'
+     
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 script {
                     echo 'Analyzing the code...'
-                    // Example: sh 'sonar-scanner'
+
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo 'Performing security scan...'
-                    // Example: sh 'npm audit'
+            
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying to staging server...'
-                    // Example: sh 'deploy-script.sh'
+         
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running integration tests on staging...'
-                    // Example: sh 'integration-test-script.sh'
+    
                 }
             }
         }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying to production server...'
-                    // Example: sh 'deploy-script.sh'
+          
                 }
             }
         }
@@ -62,12 +62,12 @@ pipeline {
 
     post {
         success {
-            mail to: 'developer@example.com',
+            mail to: 'safymalik@yahoo.com',
                  subject: "Pipeline Success",
                  body: "The pipeline has completed successfully."
         }
         failure {
-            mail to: 'developer@example.com',
+            mail to: 'safymalik@yahoo.com',
                  subject: "Pipeline Failure",
                  body: "The pipeline has failed. Please check the logs for more details."
         }
