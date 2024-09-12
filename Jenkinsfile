@@ -16,13 +16,13 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: 'malekksaify@gmail.com',
+                    emailext to: 'safymalik@yahoo.com',
                             subject: "Unit and Integration Tests Success",
                             body: "All unit and integration tests have passed.",
                             attachmentsPattern: '**/target/surefire-reports/*.xml'
                 }
                 failure {
-                    emailext to: 'malekksaify@gmail.com',
+                    emailext to: 'safymalik@yahoo.com',
                             subject: "Unit and Integration Tests Failure",
                             body: "Some unit or integration tests have failed. Please check the logs for more details.",
                             attachmentsPattern: '**/target/surefire-reports/*.xml'
@@ -44,13 +44,13 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: 'malekksaify@gmail.com',
+                    emailext to: 'safymalik@yahoo.com',
                             subject: "Security Scan Success",
                             body: "Security scan completed successfully without critical issues.",
                             attachmentsPattern: '**/zap-reports/*.xml'
                 }
                 failure {
-                    emailext to: 'malekksaify@gmail.com',
+                    emailext to: 'safymalik@yahoo.com',
                             subject: "Security Scan Failure",
                             body: "Security scan has identified issues. Please review the scan results.",
                             attachmentsPattern: '**/zap-reports/*.xml'
@@ -81,13 +81,13 @@ pipeline {
     }
     post {
         success {
-            emailext to: 'malekksaify@gmail.com',
+            emailext to: 'safymalik@yahoo.com',
                     subject: "Pipeline Complete Success",
                     body: "The entire pipeline has completed successfully and the application is now in production.",
                     attachmentsPattern: '**/logs/*.log'
         }
         failure {
-            emailext to: 'malekksaify@gmail.com',
+            emailext to: 'safymalik@yahoo.com',
                     subject: "Pipeline Complete Failure",
                     body: "The pipeline has encountered a failure in one of its stages. Please check the logs for more details.",
                     attachmentsPattern: '**/logs/*.log'
