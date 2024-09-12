@@ -4,63 +4,40 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo 'Building the code using Maven or Gradle...'
+                    echo 'Building the code...'
                 }
             }
         }
         stage('Unit and Integration Tests') {
             steps {
                 script {
-                    echo 'Running unit and integration tests using JUnit or TestNG...'
+                    echo 'Running unit and integration tests...'
                 }
             }
             post {
                 success {
                     emailext to: 'safymalik@yahoo.com',
-                            subject: "Unit and Integration Tests Success",
-                            body: "All unit and integration tests have passed.",
-                            attachmentsPattern: '**/target/surefire-reports/*.xml'
+                            subject: "Unit and Integration Tests Passed",
+                            body: "All unit and integration tests have passed successfully."
                 }
                 failure {
                     emailext to: 'safymalik@yahoo.com',
-                            subject: "Unit and Integration Tests Failure",
-                            body: "Some unit or integration tests have failed. Please check the logs for more details.",
-                            attachmentsPattern: '**/target/surefire-reports/*.xml'
+                            subject: "Unit and Integration Tests Failed",
+                            body: "Some unit or integration tests have failed. Please check the logs for more details."
                 }
             }
         }
         stage('Code Analysis') {
             steps {
                 script {
-                    echo 'Analyzing the code using SonarQube or Checkstyle...'
-                }
-            }
-        }
-        stage('Security Scan') {
-            steps {
-                script {
-                    echo 'Performing security scan using OWASP ZAP or Fortify...'
-                }
-            }
-            post {
-                success {
-                    emailext to: 'safymalik@yahoo.com',
-                            subject: "Security Scan Success",
-                            body: "Security scan completed successfully without critical issues.",
-                            attachmentsPattern: '**/zap-reports/*.xml'
-                }
-                failure {
-                    emailext to: 'safymalik@yahoo.com',
-                            subject: "Security Scan Failure",
-                            body: "Security scan has identified issues. Please review the scan results.",
-                            attachmentsPattern: '**/zap-reports/*.xml'
+                    echo 'Analyzing the code...'
                 }
             }
         }
         stage('Deploy to Staging') {
             steps {
                 script {
-                    echo 'Deploying to staging server using Docker or Kubernetes...'
+                    echo 'Deploying to staging server...'
                 }
             }
         }
@@ -74,7 +51,7 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 script {
-                    echo 'Deploying to production server using Docker or Kubernetes...'
+                    echo 'Deploying to production server...'
                 }
             }
         }
@@ -82,15 +59,13 @@ pipeline {
     post {
         success {
             emailext to: 'safymalik@yahoo.com',
-                    subject: "Pipeline Complete Success",
-                    body: "The entire pipeline has completed successfully and the application is now in production.",
-                    attachmentsPattern: '**/logs/*.log'
+                    subject: "Pipeline Success",
+                    body: "The pipeline completed successfully."
         }
         failure {
             emailext to: 'safymalik@yahoo.com',
-                    subject: "Pipeline Complete Failure",
-                    body: "The pipeline has encountered a failure in one of its stages. Please check the logs for more details.",
-                    attachmentsPattern: '**/logs/*.log'
+                    subject: "Pipeline Failure",
+                    body: "The pipeline failed. Please check the logs for more details."
         }
     }
 }
