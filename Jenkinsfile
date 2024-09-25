@@ -3,18 +3,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    // Capture the output of the build step into a log file
-                    echo 'Building the code using Maven or Gradle...' | tee 'build.log'
-                }
+                // Use the shell (sh) command to redirect the output to 'build.log'
+                sh '''
+                echo "Building the code using Maven or Gradle..." > build.log
+                '''
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                script {
-                    // Capture the output of unit and integration tests into a log file
-                    echo 'Running unit and integration tests using JUnit or TestNG...' | tee 'unit-tests.log'
-                }
+                // Capture the output of unit and integration tests into 'unit-tests.log'
+                sh '''
+                echo "Running unit and integration tests using JUnit or TestNG..." > unit-tests.log
+                '''
             }
             post {
                 success {
@@ -33,54 +33,54 @@ pipeline {
         }
         stage('Code Analysis') {
             steps {
-                script {
-                    // Capture code analysis output
-                    echo 'Analyzing the code using SonarQube or Checkstyle...' | tee 'code-analysis.log'
-                }
+                // Capture code analysis output into 'code-analysis.log'
+                sh '''
+                echo "Analyzing the code using SonarQube or Checkstyle..." > code-analysis.log
+                '''
             }
         }
         stage('Security Scan') {
             steps {
-                script {
-                    // Capture security scan output
-                    echo 'Performing security scan using OWASP ZAP or Fortify...' | tee 'security-scan.log'
-                }
+                // Capture security scan output into 'security-scan.log'
+                sh '''
+                echo "Performing security scan using OWASP ZAP or Fortify..." > security-scan.log
+                '''
             }
             post {
                 success {
                     emailext to: 'safymalik@yahoo.com',
                             subject: "Security Scan Success",
                             body: "Security scan completed successfully without critical issues.",
-                            attachmentsPattern: '**/security-scan.log'  // Attach security scan log file
+                            attachmentsPattern: '**/security-scan.log'  // Attach log file
                 }
                 failure {
                     emailext to: 'safymalik@yahoo.com',
                             subject: "Security Scan Failure",
                             body: "Security scan has identified issues. Please review the scan results.",
-                            attachmentsPattern: '**/security-scan.log'  // Attach security scan log file
+                            attachmentsPattern: '**/security-scan.log'  // Attach log file
                 }
             }
         }
         stage('Deploy to Staging') {
             steps {
-                script {
-                    // Capture deploy output
-                    echo 'Deploying to staging server using Docker or Kubernetes...' | tee 'deploy-staging.log'
-                }
+                // Capture deploy output into 'deploy-staging.log'
+                sh '''
+                echo "Deploying to staging server using Docker or Kubernetes..." > deploy-staging.log
+                '''
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                script {
-                    echo 'Running integration tests on staging environment...' | tee 'integration-tests-staging.log'
-                }
+                sh '''
+                echo "Running integration tests on staging environment..." > integration-tests-staging.log
+                '''
             }
         }
         stage('Deploy to Production') {
             steps {
-                script {
-                    echo 'Deploying to production server using Docker or Kubernetes...' | tee 'deploy-production.log'
-                }
+                sh '''
+                echo "Deploying to production server using Docker or Kubernetes..." > deploy-production.log
+                '''
             }
         }
     }
